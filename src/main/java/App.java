@@ -49,5 +49,13 @@ public class App {
             }
             return null;
         }, gson::toJson);
+
+        get("/zoo/:zooUUID/stats", (req, resp) -> {
+            Zoo zoo = service.getZoo(UUID.fromString(req.params(":zooUUID")));
+            if (zoo != null) {
+                return zoo.stats();
+            }
+            return null;
+        }, gson::toJson);
     }
 }

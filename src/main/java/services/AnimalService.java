@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 
 public class AnimalService {
     private Map<UUID, Animal> animals;
@@ -27,5 +32,11 @@ public class AnimalService {
 
     public void feed (FeedRequest request) {
         feedRequests.add(request);
+    }
+
+    public Map<String, Map<Date, List<FeedRequest>>> stats () {
+        return feedRequests.stream()
+                .collect(groupingBy(FeedRequest::getAnimalID,
+                        groupingBy(FeedRequest::getDate)));
     }
 }

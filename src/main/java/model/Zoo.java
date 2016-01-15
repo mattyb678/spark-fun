@@ -2,7 +2,9 @@ package model;
 
 import services.AnimalService;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,6 +22,10 @@ public class Zoo {
     public void feedAnimal (FeedRequest request) {
         addFeed(request.getFood(), -1 * request.getAmount());
         animalService.feed(request);
+    }
+
+    public Map<String, Map<Date, List<FeedRequest>>> stats () {
+        return animalService.stats();
     }
 
     public UUID addAnimal (String speciesName) {
