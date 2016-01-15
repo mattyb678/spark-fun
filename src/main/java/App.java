@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import model.Zoo;
 import services.ZooService;
 
 import java.util.UUID;
@@ -19,5 +20,14 @@ public class App {
         put("/zoo/:zooName", (req, resp) -> {
             return service.createZoo(req.params(":zooName"));
         });
+
+        put("/zoo/:zooUUID/:feedName/:amount", (req, resp) -> {
+            Zoo zoo = service.getZoo(UUID.fromString(req.params(":zooUUID")));
+            if (zoo != null) {
+                zoo.addFeed(req.params(":feedName"), Integer.parseInt(req.params(":amount")));
+                return zoo;
+            }
+            return null;
+        }, gson::toJson);
     }
 }
