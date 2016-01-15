@@ -17,6 +17,11 @@ public class Zoo {
         animalService = new AnimalService();
     }
 
+    public void feedAnimal (FeedRequest request) {
+        addFeed(request.getFood(), -1 * request.getAmount());
+        animalService.feed(request);
+    }
+
     public UUID addAnimal (String speciesName) {
         return animalService.add(speciesName);
     }

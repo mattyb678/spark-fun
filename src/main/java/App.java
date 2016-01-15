@@ -13,6 +13,11 @@ public class App {
         System.out.println("App started");
 
         ZooService service = new ZooService();
+        UUID zooID = service.createZoo("newZoo");
+        System.out.println(zooID);
+        Zoo testZoo = service.getZoo(zooID);
+        UUID hippID = testZoo.addAnimal("hippo");
+        System.out.println(hippID);
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("MM/dd/yyyy")
@@ -39,7 +44,7 @@ public class App {
             Zoo zoo = service.getZoo(UUID.fromString(req.params(":zooUUID")));
             FeedRequest feedRequest = gson.fromJson(req.body(), FeedRequest.class);
             if (zoo != null) {
-
+                zoo.feedAnimal(feedRequest);
                 return zoo;
             }
             return null;
