@@ -13,6 +13,7 @@ public class App {
         System.out.println("App started");
 
         ZooService service = new ZooService();
+
         Gson gson = new GsonBuilder()
                 .setDateFormat("MM/dd/yyyy")
                 .create();

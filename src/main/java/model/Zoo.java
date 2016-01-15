@@ -1,15 +1,24 @@
 package model;
 
+import services.AnimalService;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Zoo {
     private String zooName;
     private Map<String, Integer> feedInventory;
+    private AnimalService animalService;
 
     public Zoo (String name) {
         zooName = name;
         feedInventory = new HashMap<>();
+        animalService = new AnimalService();
+    }
+
+    public UUID addAnimal (String speciesName) {
+        return animalService.add(speciesName);
     }
 
     public void addFeed (String feedName, int amount) {
